@@ -15,7 +15,7 @@ def main():
             fins.append(player)
 
     for player in fins:
-        print(f"{player.name} team {player.team} goals {player.goals} assists {player.assists}")
+        print(f"{player.name:20}{player.team:5}{player.goals:2} + {player.assists:2} = {player.goals + player.assists}")
 
 if __name__ == "__main__":
     main()
