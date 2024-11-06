@@ -1,3 +1,7 @@
 __pycache__
 .pytest_cache
 .coverage
+selenium.*
+log.html
+output.xml
+report.html
