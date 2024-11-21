@@ -13,12 +13,12 @@ class Kayttoliittyma:
     def __init__(self, sovelluslogiikka, root):
         self._sovelluslogiikka = sovelluslogiikka
         self._root = root
-
+        self._kumoa_komento = Kumoa(sovelluslogiikka)
         self._komennot = {
             Komento.SUMMA: Summa(sovelluslogiikka, self._lue_syote),
             Komento.EROTUS: Erotus(sovelluslogiikka, self._lue_syote),
             Komento.NOLLAUS: Nollaus(sovelluslogiikka),
-            Komento.KUMOA: Kumoa(sovelluslogiikka, self._lue_syote) # ei ehkä tarvita täällä...
+            Komento.KUMOA: self._kumoa_komento
         }
 
     def kaynnista(self):
@@ -67,6 +67,9 @@ class Kayttoliittyma:
     def _suorita_komento(self, komento):
         komento_olio = self._komennot[komento]
         komento_olio.suorita()
+
+        if komento != Komento.KUMOA:
+            self._kumoa_komento.aseta_viimeisin_komento(komento_olio)
 
         self._kumoa_painike["state"] = constants.NORMAL
 
